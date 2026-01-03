@@ -1,3 +1,5 @@
+from collections import Counter
+
 def can_construct(ransomNote: str, magazine: str) -> bool:
     """
     Determines if ransomNote can be constructed using letters from magazine.
@@ -10,4 +12,13 @@ def can_construct(ransomNote: str, magazine: str) -> bool:
     Returns:
         bool: True if ransomNote can be constructed, False otherwise.
     """
-    pass  # TODO: Implement this function
+    note_counts = Counter(ransomNote)
+    mag_counts = Counter(magazine)
+
+    # For every character needed in the ransom note,
+    # ensure magazine has at least that many occurrences.
+    for ch, needed in note_counts.items():
+        if mag_counts[ch] < needed:
+            return False
+
+    return True
